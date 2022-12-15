@@ -10,18 +10,54 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:kusk.helloWorld"
+		"onCommand:kusk.new"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "kusk.helloWorld",
-				"title": "Hello World"
+				"command": "kusk.new",
+				"title": "kusk: new"
+			},
+			{
+				"command": "kusk.install",
+				"title": "kusk: install"
+			},
+			{
+				"command": "kusk.api-generate",
+				"title": "kusk: api generate"
+			},
+			{
+				"command": "kusk.dashboard",
+				"title": "kusk: dashboard"
 			}
-		]
+		],
+		"views": {
+			"kusk": [
+				{
+					"id": "x-kusk",
+					"name": "x-kusk"
+				},
+				{
+					"id": "openapi-def",
+					"name": "openapi-def"
+				}
+			]
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "kusk",
+					"title": "kusk",
+					"icon": "./assets/kusklogo.svg"
+				}
+			]
+		}
 	},
 	"scripts": {
+		"install:all": "npm install && cd webview-ui && npm install",
+		"start:webview": "cd webview-ui && npm run dev",
+		"build:webview": "cd webview-ui && npm run build",
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
@@ -30,16 +66,19 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.67.0",
 		"@types/glob": "^7.2.0",
 		"@types/mocha": "^9.1.1",
 		"@types/node": "14.x",
+		"@types/vscode": "^1.67.0",
 		"@typescript-eslint/eslint-plugin": "^5.21.0",
 		"@typescript-eslint/parser": "^5.21.0",
+		"@vscode/test-electron": "^2.1.3",
 		"eslint": "^8.14.0",
 		"glob": "^8.0.1",
 		"mocha": "^9.2.2",
-		"typescript": "^4.6.4",
-		"@vscode/test-electron": "^2.1.3"
+		"typescript": "^4.6.4"
+	},
+	"dependencies": {
+		"yaml": "^2.1.3"
 	}
 }
